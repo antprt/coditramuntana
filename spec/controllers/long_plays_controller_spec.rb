@@ -22,10 +22,18 @@ RSpec.describe LongPlaysController, type: :controller do
   # LongPlaysController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
-  describe "GET #index" do
+  describe "GET #index without filter" do
     it "returns a success response" do
       long_play.save! valid_attributes
-      get :index, {}, valid_session
+      get :index, {}
+      expect(response).to be_successful
+    end
+  end
+
+  describe "GET #index with filter" do
+    it "returns a success response" do
+      long_play.save! valid_attributes
+      get :index, xhr: true, params: {term: "a"}
       expect(response).to be_successful
     end
   end
@@ -33,14 +41,14 @@ RSpec.describe LongPlaysController, type: :controller do
   describe "GET #show" do
     it "returns a success response" do
       lp = long_play.save! valid_attributes
-      get :show, {:id => lp.to_param}, valid_session
+      get :show, params: {:id => lp.to_param}
       expect(response).to be_successful
     end
   end
 
   describe "GET #new" do
     it "returns a success response" do
-      get :new, {}, valid_session
+      get :new, {}
       expect(response).to be_successful
     end
   end
@@ -48,7 +56,7 @@ RSpec.describe LongPlaysController, type: :controller do
   describe "GET #edit" do
     it "returns a success response" do
       lp = long_play.save! valid_attributes
-      get :edit, {:id => lp.to_param}, valid_session
+      get :edit, params: {:id => lp.to_param}
       expect(response).to be_successful
     end
   end
@@ -59,21 +67,21 @@ RSpec.describe LongPlaysController, type: :controller do
         artist = FactoryBot.create(:artist)
         valid_attributes[:artist_id] = artist.id
         expect {
-          post :create, {:long_play => valid_attributes}, valid_session
+          post :create, params: {:long_play => valid_attributes}
         }.to change(LongPlay, :count).by(1)
       end
 
       it "redirects to the created long_play" do
         artist = FactoryBot.create(:artist)
         valid_attributes[:artist_id] = artist.id
-        post :create, {:long_play => valid_attributes}, valid_session
+        post :create, params: {:long_play => valid_attributes}
         expect(response).to redirect_to(LongPlay.last)
       end
     end
 
     context "with invalid params" do
       it "returns a success response (i.e. to display the 'new' template)" do
-        post :create, {:long_play => invalid_attributes}, valid_session
+        post :create, params: {:long_play => invalid_attributes}
         expect(response).to be_successful
       end
     end
@@ -87,13 +95,13 @@ RSpec.describe LongPlaysController, type: :controller do
 
       it "updates the requested long_play" do
         long_play.save! valid_attributes
-        put :update, {:id => long_play.to_param, :long_play => new_attributes}, valid_session
+        put :update, params: {:id => long_play.to_param, :long_play => new_attributes}
         expect(long_play.reload.name).to eq(new_attributes[:name])
       end
 
       it "redirects to the long_play" do
         long_play.save! valid_attributes
-        put :update, {:id => long_play.to_param, :long_play => new_attributes}, valid_session
+        put :update, params: {:id => long_play.to_param, :long_play => new_attributes}
         expect(response).to redirect_to(long_play)
       end
     end
@@ -101,7 +109,7 @@ RSpec.describe LongPlaysController, type: :controller do
     context "with invalid params" do
       it "returns a success response (i.e. to display the 'edit' template)" do
         long_play.save! valid_attributes
-        put :update, {:id => long_play.to_param, :long_play => invalid_attributes}, valid_session
+        put :update, params: {:id => long_play.to_param, :long_play => invalid_attributes}
         expect(response).to be_successful
       end
     end
@@ -111,14 +119,14 @@ RSpec.describe LongPlaysController, type: :controller do
     it "destroys the requested long_play" do
       long_play.save! valid_attributes
       expect {
-        xhr :delete, :destroy, {:id => long_play.to_param}, valid_session
+        post :destroy, xhr: true, params: {id: long_play.to_param}
       }.to change(LongPlay, :count).by(-1)
     end
 
     it "redirects to the long_plays list" do
       long_play.save! valid_attributes
-      xhr :delete, :destroy, {:id => long_play.to_param}, valid_session
-      response.content_type.should == Mime::JS
+      post :destroy, xhr: true, params: {id: long_play.to_param}
+      expect(response.content_type).to eq(Mime[:js])
     end
   end
 

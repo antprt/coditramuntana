@@ -21,7 +21,7 @@ RSpec.describe ArtistsController, type: :controller do
   describe "GET #index" do
     it "returns a success response" do
       Artist.create! valid_attributes
-      get :index, {}, valid_session
+      get :index, {}
       expect(response).to be_successful
     end
   end
@@ -29,14 +29,14 @@ RSpec.describe ArtistsController, type: :controller do
   describe "GET #show" do
     it "returns a success response" do
       artist = Artist.create! valid_attributes
-      get :show, {:id => artist.to_param}, valid_session
+      get :show, params: {:id => artist.to_param}
       expect(response).to be_successful
     end
   end
 
   describe "GET #new" do
     it "returns a success response" do
-      get :new, {}, valid_session
+      get :new, {}
       expect(response).to be_successful
     end
   end
@@ -44,7 +44,7 @@ RSpec.describe ArtistsController, type: :controller do
   describe "GET #edit" do
     it "returns a success response" do
       artist = Artist.create! valid_attributes
-      get :edit, {:id => artist.to_param}, valid_session
+      get :edit, params: {:id => artist.to_param}
       expect(response).to be_successful
     end
   end
@@ -53,19 +53,19 @@ RSpec.describe ArtistsController, type: :controller do
     context "with valid params" do
       it "creates a new Artist" do
         expect {
-          post :create, {:artist => valid_attributes}, valid_session
+          post :create, params: {:artist => valid_attributes}
         }.to change(Artist, :count).by(1)
       end
 
       it "redirects to the created artist" do
-        post :create, {:artist => valid_attributes}, valid_session
+        post :create, params: {:artist => valid_attributes}
         expect(response).to redirect_to(Artist.last)
       end
     end
 
     context "with invalid params" do
       it "returns a success response (i.e. to display the 'new' template)" do
-        post :create, {:artist => invalid_attributes}, valid_session
+        post :create, params: {:artist => invalid_attributes}
         expect(response).to be_successful
       end
     end
@@ -79,13 +79,13 @@ RSpec.describe ArtistsController, type: :controller do
 
       it "updates the requested artist" do
         artist = Artist.create! valid_attributes
-        put :update, {:id => artist.to_param, :artist => new_attributes}, valid_session
+        put :update, params: {:id => artist.to_param, :artist => new_attributes}
         expect(artist.reload.name).to eq(new_attributes[:name])
       end
 
       it "redirects to the artist" do
         artist = Artist.create! valid_attributes
-        put :update, {:id => artist.to_param, :artist => valid_attributes}, valid_session
+        put :update, params: {:id => artist.to_param, :artist => valid_attributes}
         expect(response).to redirect_to(artist)
       end
     end
@@ -93,7 +93,7 @@ RSpec.describe ArtistsController, type: :controller do
     context "with invalid params" do
       it "returns a success response (i.e. to display the 'edit' template)" do
         artist = Artist.create! valid_attributes
-        put :update, {:id => artist.to_param, :artist => invalid_attributes}, valid_session
+        put :update, params: {:id => artist.to_param, :artist => invalid_attributes}
         expect(response).to be_successful
       end
     end
@@ -103,14 +103,14 @@ RSpec.describe ArtistsController, type: :controller do
     it "destroys the requested artist" do
       artist = Artist.create! valid_attributes
       expect {
-        xhr :delete, :destroy, {:id => artist.to_param}, valid_session
+        post :destroy, xhr: true, params: {id: artist.to_param}
       }.to change(Artist, :count).by(-1)
     end
 
     it "redirects to the artists list" do
       artist = Artist.create! valid_attributes
-      xhr :delete, :destroy, {:id => artist.to_param}, valid_session
-      response.content_type.should == Mime::JS
+      post :destroy, xhr: true, params: {id: artist.to_param}
+      expect(response.content_type).to eq(Mime[:js])
     end
   end
 
