@@ -25,7 +25,7 @@ class ArtistsController < ApplicationController
 
     respond_to do |format|
       if @artist.save
-        format.html { redirect_to @artist, notice: 'Artist was successfully created.' }
+        format.html { redirect_to @artist, flash: { notice: 'Artist was successfully created.' } }
       else
         format.html { render :new }
       end
@@ -36,7 +36,7 @@ class ArtistsController < ApplicationController
   def update
     respond_to do |format|
       if @artist.update(artist_params)
-        format.html { redirect_to @artist, notice: 'Artist was successfully updated.' }
+        format.html { redirect_to @artist, flash: {notice: 'Artist was successfully updated.'} }
       else
         format.html { render :edit }
       end

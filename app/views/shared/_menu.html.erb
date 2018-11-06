@@ -1,9 +1,9 @@
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
-      <%= active_link_to "Home", root_url, active: :exclusive %>
-      <%= active_link_to "Artists", artists_url, active: :inclusive %>
-      <%= active_link_to "LPs", long_plays_url, active: :inclusive %>
+      <%= active_link_to "Home", root_url, active: :exclusive, class: "btn btn-link" %>
+      <%= active_link_to "Artists", artists_url, active: :inclusive, class: "btn btn-link" %>
+      <%= active_link_to "LPs", long_plays_url, active: :inclusive, class: "btn btn-link" %>
     </div>
   </div>
 </nav>

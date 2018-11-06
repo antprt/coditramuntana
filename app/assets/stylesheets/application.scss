@@ -27,10 +27,23 @@ body{
   text-align: right;
 }
 
-form{
-  max-width: 500px;
+.object-form{
+  max-width: 400px;
 }
 
-a:hover{
-  text-decoration: none;
+.search-form{
+  margin: 20px 0;
+}
+
+nav{
+  background-color: #dcdcdc;
+  border-radius: 5px;
+}
+
+h3{
+  margin-top: 25px; 
+}
+
+.btn-link, .btn-link:hover{
+  color: #666;
 }
