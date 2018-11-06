@@ -74,14 +74,13 @@ RSpec.describe ArtistsController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        {name: "New Name"}
       }
 
       it "updates the requested artist" do
         artist = Artist.create! valid_attributes
         put :update, {:id => artist.to_param, :artist => new_attributes}, valid_session
-        artist.reload
-        skip("Add assertions for updated state")
+        expect(artist.reload.name).to eq(new_attributes[:name])
       end
 
       it "redirects to the artist" do

@@ -10,7 +10,7 @@ RSpec.describe Artist, type: :model do
   end
 
   it "Name duplicated invalid record" do
-    FactoryBot.create(:artist)
-    FactoryBot.build(:artist).should_not be_valid
+    artist = FactoryBot.create(:artist)
+    FactoryBot.build(:artist, name: artist.name).should_not be_valid
   end
 end

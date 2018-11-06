@@ -2,10 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "artists/edit", type: :view do
   before(:each) do
-    @artist = assign(:artist, Artist.create!(
-      :name => "MyString",
-      :description => "MyText"
-    ))
+    @artist = FactoryBot.create(:artist)
   end
 
   it "renders the edit artist form" do

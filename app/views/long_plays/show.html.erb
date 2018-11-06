@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @long_play.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @long_play.description %>
+</p>
+
+<p>
+  <strong>Artist:</strong>
+  <%= @long_play.artist %>
+</p>
+
+<%= link_to 'Edit', edit_long_play_path(@long_play) %> |
+<%= link_to 'Back', long_plays_path %>
