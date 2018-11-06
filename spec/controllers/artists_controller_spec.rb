@@ -104,14 +104,14 @@ RSpec.describe ArtistsController, type: :controller do
     it "destroys the requested artist" do
       artist = Artist.create! valid_attributes
       expect {
-        delete :destroy, {:id => artist.to_param}, valid_session
+        xhr :delete, :destroy, {:id => artist.to_param}, valid_session
       }.to change(Artist, :count).by(-1)
     end
 
     it "redirects to the artists list" do
       artist = Artist.create! valid_attributes
-      delete :destroy, {:id => artist.to_param}, valid_session
-      expect(response).to redirect_to(artists_url)
+      xhr :delete, :destroy, {:id => artist.to_param}, valid_session
+      response.content_type.should == Mime::JS
     end
   end
 

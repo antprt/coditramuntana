@@ -45,10 +45,10 @@ class ArtistsController < ApplicationController
 
   # DELETE /artists/1
   def destroy
+    @id = @artist.id
     @artist.destroy
     respond_to do |format|
-      format.html { redirect_to artists_url, notice: 'Artist was successfully destroyed.' }
-      format.json { head :no_content }
+      format.js
     end
   end
 
