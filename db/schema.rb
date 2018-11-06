@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181106172429) do
+ActiveRecord::Schema.define(version: 20181106183108) do
 
   create_table "artists", force: :cascade do |t|
     t.string   "name",        null: false
@@ -21,5 +21,25 @@ ActiveRecord::Schema.define(version: 20181106172429) do
   end
 
   add_index "artists", ["name"], name: "index_artists_on_name", unique: true
+
+  create_table "long_p_lays", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "artist_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "long_p_lays", ["artist_id"], name: "index_long_p_lays_on_artist_id"
+
+  create_table "long_plays", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "artist_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "long_plays", ["artist_id"], name: "index_long_plays_on_artist_id"
 
 end
