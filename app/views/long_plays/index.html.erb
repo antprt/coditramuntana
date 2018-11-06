@@ -2,30 +2,10 @@
 
 <h3>Listing Long Plays</h3>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Artist</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @long_plays.each do |long_play| %>
-      <tr id="long-play-<%= long_play.id %>">
-        <td><%= long_play.name %></td>
-        <td><%= long_play.description %></td>
-        <td><%= long_play.artist.name %></td>
-        <td><%= link_to 'Show', long_play %></td>
-        <td><%= link_to 'Edit', edit_long_play_path(long_play) %></td>
-        <td><%= link_to 'Destroy', long_play, method: :delete, remote: true, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div id="long-plays-list">
+  <%= render "list" %>
+</div>
 
 <br>
 
-<%= link_to 'New Long play', new_long_play_path %>
+<%= link_to 'New Long play', new_long_play_path, class: "btn btn-link" %>

@@ -3,7 +3,12 @@ class LongPlaysController < ApplicationController
 
   # GET /long_plays
   def index
-    @long_plays = LongPlay.all.includes(:artist)
+    if params[:term].present?
+      @long_plays = LongPlay.get_by_artist_name(params[:term])
+      @term = params[:term]
+    else
+      @long_plays = LongPlay.all.includes(:artist)
+    end
   end
 
   # GET /long_plays/1
@@ -25,7 +30,7 @@ class LongPlaysController < ApplicationController
 
     respond_to do |format|
       if @long_play.save
-        format.html { redirect_to @long_play, notice: 'Long play was successfully created.' }
+        format.html { redirect_to @long_play, flash: {notice: 'Long play was successfully created.'} }
       else
         format.html { render :new }
       end
@@ -36,7 +41,7 @@ class LongPlaysController < ApplicationController
   def update
     respond_to do |format|
       if @long_play.update(long_play_params)
-        format.html { redirect_to @long_play, notice: 'Long play was successfully updated.' }
+        format.html { redirect_to @long_play, flash: {notice: 'Long play was successfully updated.'} }
       else
         format.html { render :edit }
       end
