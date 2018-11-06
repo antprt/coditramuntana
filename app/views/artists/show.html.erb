@@ -10,5 +10,11 @@
   <%= @artist.description %>
 </p>
 
+<p>
+  <strong>Total LPs:</strong>
+  <%= link_to "Ver #{@artist.long_play.count} LPs", long_plays_path(term: @artist.name), class: "btn-link" %>
+</p>
+
+
 <%= link_to 'Edit', edit_artist_path(@artist), class: "btn btn-link" %> |
 <%= link_to 'Back', artists_path, class: "btn btn-link" %>
