@@ -14,10 +14,12 @@
 ActiveRecord::Schema.define(version: 20181106172429) do
 
   create_table "artists", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name",        null: false
     t.text     "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
+
+  add_index "artists", ["name"], name: "index_artists_on_name", unique: true
 
 end

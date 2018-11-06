@@ -8,4 +8,9 @@ RSpec.describe Artist, type: :model do
   it "Description not present" do
     FactoryBot.build(:artist, description: nil).should_not be_valid
   end
+
+  it "Name duplicated invalid record" do
+    FactoryBot.create(:artist)
+    FactoryBot.build(:artist).should_not be_valid
+  end
 end
