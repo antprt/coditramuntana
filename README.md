@@ -17,5 +17,5 @@ The system use sqlite database by default. You can change it in the database.yml
 
 1.Create database: rake db:schema:load db:seed
 
-1.Start the server: rails s
+2.Start the server: rails s
 
