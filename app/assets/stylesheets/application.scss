@@ -13,3 +13,24 @@
  *= require_tree .
  *= require_self
  */
+ @import "bootstrap";
+
+body{
+  margin:0 20px;
+}
+
+.active{
+  font-weight: 700;
+}
+
+.actions{
+  text-align: right;
+}
+
+form{
+  max-width: 500px;
+}
+
+a:hover{
+  text-decoration: none;
+}

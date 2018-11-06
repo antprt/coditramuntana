@@ -11,19 +11,20 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :name %><br>
     <%= f.text_field :name %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :description %><br>
     <%= f.text_area :description %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :artist_id %><br>
     <%= f.text_field :artist_id %>
   </div>
   <div class="actions">
+    <%= link_to 'Back', long_plays_path %>
     <%= f.submit %>
   </div>
 <% end %>
