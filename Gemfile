@@ -49,4 +49,7 @@ group :development, :test do
 
   #Example data
   gem 'factory_bot_rails'
+
+  #Faker datas
+  gem 'faker'
 end
