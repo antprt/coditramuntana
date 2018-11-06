@@ -8,12 +8,12 @@ RSpec.describe "artists/index", type: :view do
         :description => "MyText"
       ),
       Artist.create!(
-        :name => "Name",
-        :description => "MyText"
+        :name => "Name 2",
+        :description => "MyText 2"
       )
     ])
   end
-
+  
   it "renders a list of artists" do
     render
     assert_select "tr>td", :text => "Name".to_s, :count => 2
