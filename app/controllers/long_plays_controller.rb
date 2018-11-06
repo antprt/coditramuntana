@@ -3,7 +3,7 @@ class LongPlaysController < ApplicationController
 
   # GET /long_plays
   def index
-    @long_plays = LongPlay.all
+    @long_plays = LongPlay.all.includes(:artist)
   end
 
   # GET /long_plays/1
